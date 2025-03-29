@@ -1,103 +1,119 @@
 import Image from "next/image";
+import Link from "next/link";
+
+interface CourseCard {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  price: string;
+  instructor: string;
+  rating: number;
+  students: number;
+}
+
+const courses: CourseCard[] = [
+  {
+    id: "1",
+    title: "HTML, CSS từ Zero đến Hero",
+    description: "Khóa học HTML, CSS từ cơ bản đến nâng cao cho người mới, không cần kinh nghiệm.",
+    image: "/course-1.jpg",
+    price: "Miễn phí",
+    instructor: "Sơn Đặng",
+    rating: 4.8,
+    students: 1234
+  },
+  {
+    id: "2",
+    title: "JavaScript cơ bản",
+    description: "Học JavaScript cơ bản qua thực hành, tự học frontend qua bài tập thực tế.",
+    image: "/course-2.jpg",
+    price: "Miễn phí",
+    instructor: "Sơn Đặng",
+    rating: 4.9,
+    students: 2345
+  },
+  {
+    id: "3",
+    title: "ReactJS cơ bản",
+    description: "Học ReactJS từ cơ bản đến nâng cao, làm việc với dự án thực tế.",
+    image: "/course-3.jpg",
+    price: "Miễn phí",
+    instructor: "Sơn Đặng",
+    rating: 4.7,
+    students: 3456
+  }
+];
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="container mx-auto px-4 py-4 sm:py-8">
+      {/* Hero Section */}
+      <section className="text-center mb-8 sm:mb-12">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-4">Học Lập Trình Để Đi Làm</h1>
+        <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto px-4">
+          Học lập trình trực tuyến từ những người có kinh nghiệm. Không cần kinh nghiệm, không cần bằng cấp.
+        </p>
+      </section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Featured Courses */}
+      <section className="mb-8 sm:mb-12">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 px-4">Khóa học nổi bật</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {courses.map((course) => (
+            <Link 
+              key={course.id} 
+              href={`/khoa-hoc/${course.id}`}
+              className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+            >
+              <div className="relative h-40 sm:h-48">
+                <Image
+                  src={course.image}
+                  alt={course.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-3 sm:p-4">
+                <h3 className="font-semibold text-base sm:text-lg mb-2">{course.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 sm:mb-4 line-clamp-2">
+                  {course.description}
+                </p>
+                <div className="flex items-center justify-between text-xs sm:text-sm">
+                  <span className="text-orange-500 font-medium">{course.price}</span>
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <span className="text-yellow-500">★</span>
+                    <span>{course.rating}</span>
+                    <span className="text-gray-500 hidden sm:inline">({course.students} học viên)</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="bg-white dark:bg-gray-800 rounded-lg p-6 sm:p-8 mb-8 sm:mb-12">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center">Tại sao chọn chúng tôi?</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+          <div className="text-center p-4">
+            <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">🎯</div>
+            <h3 className="font-semibold mb-2">Học thực tế</h3>
+            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">Học qua dự án thực tế, có thể làm việc ngay sau khi học</p>
+          </div>
+          <div className="text-center p-4">
+            <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">👨‍🏫</div>
+            <h3 className="font-semibold mb-2">Giảng viên chất lượng</h3>
+            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">Đội ngũ giảng viên có nhiều kinh nghiệm trong ngành</p>
+          </div>
+          <div className="text-center p-4">
+            <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">💡</div>
+            <h3 className="font-semibold mb-2">Cộng đồng sôi động</h3>
+            <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">Tham gia cộng đồng học viên đông đảo, hỗ trợ 24/7</p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

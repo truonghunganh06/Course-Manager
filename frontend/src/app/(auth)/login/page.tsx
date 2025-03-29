@@ -1,5 +1,5 @@
 import React from "react";
-import LoginForm from ;
+import LoginForm from "@/components/features/auth/login/LoginForm";
 
 const Login = () => {
     return <LoginForm />;
