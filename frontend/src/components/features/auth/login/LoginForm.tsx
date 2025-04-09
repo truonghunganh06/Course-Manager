@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import PasswordInput from '../PasswordInput';
 
 const LoginForm = () => {
   const router = useRouter();
@@ -66,21 +67,13 @@ const LoginForm = () => {
               />
             </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Mật khẩu
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                className="appearance-none block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:text-white sm:text-sm"
-                placeholder="••••••••"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
+            <PasswordInput
+              id="password"
+              name="password"
+              label="Mật khẩu"
+              value={formData.password}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="flex items-center justify-between">
@@ -124,12 +117,15 @@ const LoginForm = () => {
           </div>
 
           <div className="mt-6">
-            <Link
-              href="/signup"
-              className="w-full flex justify-center py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors duration-200"
-            >
-              Đăng ký tài khoản mới
-            </Link>
+            <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+              Bạn chưa có tài khoản?{' '}
+              <Link
+                href="/signup"
+                className="font-medium text-orange-500 hover:text-orange-600"
+              >
+                Đăng ký
+              </Link>
+            </p>
           </div>
         </div>
       </div>

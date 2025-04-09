@@ -138,12 +138,15 @@ const SignupForm = () => {
           </div>
 
           <div className="mt-6">
-            <Link
-              href="/login"
-              className="w-full flex justify-center py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors duration-200"
-            >
-              Đăng nhập nếu đã có tài khoản
-            </Link>
+            <p className="text-center text-sm text-gray-600 dark:text-gray-400">
+              Bạn có tài khoản?{' '}
+              <Link
+                href="/login"
+                className="font-medium text-orange-500 hover:text-orange-600"
+              >
+                Đăng nhập
+              </Link>
+            </p>
           </div>
         </div>
       </div>
